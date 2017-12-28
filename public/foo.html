@@ -25,7 +25,10 @@
 			var c1 = function(callback) {
 				var a = document.createElement("a");
 				a.innerHTML = "click";
-				a.setAttribute("href", "#bar/" + SPA.uuidv4());
+				a.setAttribute("href", "javascript:void(0);");
+				a.addEventListener("click", function() {
+					SPA.openPage({a:1}, "bar?t=" + SPA.timestamp());
+				});
 				
 				var r = document.createElement("div");
 				r.appendChild(a);
@@ -39,7 +42,7 @@
 			
 			SPA.addPages([
 				{
-					id : "#foo",
+					path : "/foo",
 					layout : layout,
 					context : b,
 					content : c1,
@@ -52,7 +55,7 @@
 					}
 				},
 				{
-					id : "#bar",
+					path : "/bar",
 					layout : layout,
 					context : b,
 					content : c2,
