@@ -4,6 +4,12 @@ Single page application framework.
 
 Example:
 
+Add this to your page to load the framework:
+
+```javascript
+<script src="spa.js"></script>
+```
+
 Make a page layout that has a header, body and footer:
 
 ```javascript
@@ -20,6 +26,7 @@ document.body.appendChild(layout);
 ```
 
 makes:
+
 ```
  __________
 |__header__|
@@ -30,7 +37,8 @@ makes:
 Make a function to generate page 1:
 
 ```javascript
-var c1 = function(callback) {
+// takes a callback and some data, you then generate a DOM element for your page using the data, then use the callback with your page element
+var c1 = function(callback, data) {
 	var a = document.createElement("a");
 	a.innerHTML = "click";
 	a.setAttribute("href", "javascript:void(0);");
@@ -44,14 +52,29 @@ var c1 = function(callback) {
 };
 ```
 
+makes:
+
+```
+ _________
+|__click__|
+```
+
 Make a function to generate page 2:
 
 ```javascript
-var c2 = function(callback) {
+// same concept as above
+var c2 = function(callback, data) {
 	var r = document.createElement("div");
 	r.innerHTML = "content2";
 	callback(r);
 };
+```
+
+makes:
+
+```
+ ____________
+|__content2__|
 ```
 
 Add the pages into the framework:
