@@ -85,7 +85,7 @@ SPA.addPages([
 		path : "/foo",                   // route
 		layout : layout,                 // DOM element for the page layout
 		context : b,                     // parent DOM element for the page
-		content : c1,                    // DOM element for the page
+		content : c1,                    // function that makes a DOM element for the page
 		default : true,                  // default page for when route is not resolved
 		opened : false,                  // has it been opened before?
 		first_open : function() {        // page first open event
