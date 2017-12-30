@@ -108,6 +108,7 @@ SPA.addPages([
 		}
 	}
 ]);
+```
 
 Start the framework with some data:
 
