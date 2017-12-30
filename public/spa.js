@@ -48,7 +48,12 @@ var SPA = new function() {
 
 		if (active) active.close();
 		active = page;
-		page.open();		
+		
+		if (!page.opened) {
+			page.opened = true;
+			page.first_open();
+		}
+		page.open();
 	}
 	
 	function openPage(id, page, data) {

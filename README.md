@@ -87,6 +87,10 @@ SPA.addPages([
 		context : b,                     // parent DOM element for the page
 		content : c1,                    // DOM element for the page
 		default : true,                  // default page for when route is not resolved
+		opened : false,                  // has it been opened before?
+		first_open : function() {        // page first open event
+		
+		},
 		open : function() {              // page open event
 			console.log("foo opened"); 
 		},
@@ -100,6 +104,10 @@ SPA.addPages([
 		context : b,
 		content : c2,
 		default : false,
+		opened : false,      
+		first_open : function() {
+		
+		},
 		open : function() {
 			console.log("bar opened");
 		},
