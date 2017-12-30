@@ -123,3 +123,9 @@ Start the framework with some data:
 ```javascript
 SPA.start({a:1});
 ```
+
+# License
+
+Copyright (c) 2017 TheInvoker
+
+Licensed under the [MIT license](http://www.opensource.org/licenses/mit-license.php).
