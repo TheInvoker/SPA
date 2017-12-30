@@ -89,7 +89,7 @@ SPA.addPages([
 		default : true,                  // default page for when route is not resolved
 		opened : false,                  // has it been opened before?
 		first_open : function() {        // page first open event
-		
+			console.log("foo first opened"); 
 		},
 		open : function() {              // page open event
 			console.log("foo opened"); 
@@ -106,7 +106,7 @@ SPA.addPages([
 		default : false,
 		opened : false,      
 		first_open : function() {
-		
+			console.log("bar first opened"); 	
 		},
 		open : function() {
 			console.log("bar opened");
