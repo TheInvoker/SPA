@@ -26,7 +26,7 @@
 				a.innerHTML = "click";
 				a.setAttribute("href", "javascript:void(0);");
 				a.addEventListener("click", function() {
-					SPA.openPage({a:1}, "bar?t=" + SPA.timestamp(), {a:1});
+					SPA.openPage({a:1}, "bar?t=" + SPA.timestamp());
 				});
 				
 				var r = document.createElement("div");

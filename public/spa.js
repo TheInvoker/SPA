@@ -14,9 +14,9 @@ var SPA = new function() {
 		loadPageFromHash(data);
 	};
 	
-	this.openPage = function(stateObj, url, data) {
+	this.openPage = function(stateObj, url) {
 		history.pushState(stateObj, "", url);
-		loadPageFromHash(data);
+		loadPageFromHash(stateObj);
 	};
 
 	function loadPageFromHash(data) {

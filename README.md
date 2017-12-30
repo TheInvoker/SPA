@@ -43,7 +43,7 @@ var c1 = function(callback, data) {
 	a.innerHTML = "click";
 	a.setAttribute("href", "javascript:void(0);");
 	a.addEventListener("click", function() {
-		SPA.openPage({a:1}, "bar?t=" + SPA.timestamp(), {a:1});   // switch to page 2, use timestamp to generate a new instance of the page even if the page was visited before. As well send some data.
+		SPA.openPage({a:1}, "bar?t=" + SPA.timestamp());   // switch to page 2, use timestamp to generate a new instance of the page even if the page was visited before. As well send some data.
 	});
 	
 	var r = document.createElement("div");
