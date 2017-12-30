@@ -11,7 +11,6 @@ app.use(express.static(path.join(__dirname, 'public')));
  */
 
 app.get('/foo', function(req, res) {
-	//res.redirect('/osler/index.html');
 	res.header('Content-Type', "text/html; charset=utf-8");
 	res.sendFile(path.join(__dirname, 'public/foo.html'));
 });
