@@ -22,19 +22,19 @@
 			
 			document.body.appendChild(layout);
 
-			var c1 = function(callback) {
+			var c1 = function(callback, data) {
 				var a = document.createElement("a");
 				a.innerHTML = "click";
 				a.setAttribute("href", "javascript:void(0);");
 				a.addEventListener("click", function() {
-					SPA.openPage({a:1}, "bar?t=" + SPA.timestamp());
+					SPA.openPage({a:1}, "bar?t=" + SPA.timestamp(), {a:1});
 				});
 				
 				var r = document.createElement("div");
 				r.appendChild(a);
 				callback(r);
 			};
-			var c2 = function(callback) {
+			var c2 = function(callback, data) {
 				var r = document.createElement("div");
 				r.innerHTML = "content2";
 				callback(r);
@@ -68,7 +68,7 @@
 					}
 				}
 			]);
-			SPA.start();
+			SPA.start({a:1});
 
 		</script>
 	</body>

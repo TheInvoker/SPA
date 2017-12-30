@@ -27,37 +27,47 @@ makes:
 |__footer__|
 ```
 
+Make a function to generate page 1:
 
-
+```javascript
 var c1 = function(callback) {
 	var a = document.createElement("a");
 	a.innerHTML = "click";
 	a.setAttribute("href", "javascript:void(0);");
 	a.addEventListener("click", function() {
-		SPA.openPage({a:1}, "bar?t=" + SPA.timestamp());
+		SPA.openPage({a:1}, "bar?t=" + SPA.timestamp(), {a:1});
 	});
 	
 	var r = document.createElement("div");
 	r.appendChild(a);
 	callback(r);
 };
+```
+
+Make a function to generate page 2:
+
+```javascript
 var c2 = function(callback) {
 	var r = document.createElement("div");
 	r.innerHTML = "content2";
 	callback(r);
 };
+```
 
+Add the pages into the framework:
+
+```javascript
 SPA.addPages([
 	{
-		path : "/foo",
-		layout : layout,
-		context : b,
-		content : c1,
-		default : true,
-		open : function() {
-			console.log("foo opened");
+		path : "/foo",                   // route
+		layout : layout,                 // DOM element for the page layout
+		context : b,                     // parent DOM element for the page
+		content : c1,                    // DOM element for the page
+		default : true,                  // default page for when route is not resolved
+		open : function() {              // page open event
+			console.log("foo opened"); 
 		},
-		close : function() {
+		close : function() {             // page close event
 			console.log("foo closed");
 		}
 	},
@@ -75,4 +85,9 @@ SPA.addPages([
 		}
 	}
 ]);
-SPA.start();
+
+Start the framework:
+
+```javascript
+SPA.start({a:1});
+```

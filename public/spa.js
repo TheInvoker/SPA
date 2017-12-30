@@ -10,16 +10,16 @@ var SPA = new function() {
 		user_pages.forEach(p => pages.push(p));
 	};
 	
-	this.start = function() {
-		loadPageFromHash();
+	this.start = function(data) {
+		loadPageFromHash(data);
 	};
 	
-	this.openPage = function(stateObj, url) {
+	this.openPage = function(stateObj, url, data) {
 		history.pushState(stateObj, "", url);
-		loadPageFromHash();
+		loadPageFromHash(data);
 	};
 
-	function loadPageFromHash() {
+	function loadPageFromHash(data) {
 		var path = window.location.pathname;
 		var page = pages.find(p => p.path.toLowerCase() == path.toLowerCase()) || pages.find(p => p.default);
 		if (page) {
@@ -28,7 +28,7 @@ var SPA = new function() {
 			if (p) {
 				enablePage(page, p);
 			} else {
-				openPage(url, page);
+				openPage(url, page, data);
 			}
 		} else {
 			console.warn("SPA: No route found for", path);
@@ -51,16 +51,16 @@ var SPA = new function() {
 		page.open();		
 	}
 	
-	function openPage(id, page) {
+	function openPage(id, page, data) {
 		page.content(p => {
 			opened[id] = p;
 			page.context.appendChild(p);
 			enablePage(page, p);
-		});
+		}, data);
 	}
 	
 	window.addEventListener('popstate', event => {
-		//var data = event.state;
-		loadPageFromHash();
+		var data = event.state;
+		loadPageFromHash(data);
 	}, false);
 };
