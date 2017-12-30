@@ -21,19 +21,18 @@ var SPA = new function() {
 
 	function loadPageFromHash() {
 		var path = window.location.pathname;
-		var url = window.location.pathname + window.location.hash + window.location.search;
-		var page = getPage(path);
-		var p = opened[url];
-		if (p) {
-			enablePage(page, p);
+		var page = pages.find(p => p.path.toLowerCase() == path.toLowerCase()) || pages.find(p => p.default);
+		if (page) {
+			var url = window.location.pathname + window.location.hash + window.location.search;
+			var p = opened[url];
+			if (p) {
+				enablePage(page, p);
+			} else {
+				openPage(url, page);
+			}
 		} else {
-			openPage(url, page);
+			console.warn("SPA: No route found for", path);
 		}
-	}
-	
-	function getPage(path) {
-		var page = pages.find(p => p.path.toLowerCase() == path.toLowerCase());
-		return page || pages.find(p => p.default);
 	}
 	
 	function enablePage(page, p) {
