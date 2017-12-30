@@ -20,11 +20,12 @@ document.body.appendChild(layout);
 ```
 
 makes:
+```
  __________
 |__header__|
 |__________|
 |__footer__|
-
+```
 
 
 
