@@ -37,14 +37,12 @@ var SPA = new function() {
 	
 	function enablePage(page, p) {
 		pages.forEach(p => {
-			p.layout.style.display = "none";
+			p.layout.style.display = p == page ? "block" : "none";
 		});
-		page.layout.style.display = "block";
 		
 		page.context.childNodes.forEach(c => {
-			c.style.display = "none";
+			c.style.display = c == p ? "block" : "none";
 		});
-		p.style.display = "block";	
 
 		if (active) active.close();
 		active = page;
