@@ -43,7 +43,7 @@ var c1 = function(callback, data) {
 	a.innerHTML = "click";
 	a.setAttribute("href", "javascript:void(0);");
 	a.addEventListener("click", function() {
-		SPA.openPage({a:1}, "bar?t=" + SPA.timestamp(), {a:1});
+		SPA.openPage({a:1}, "bar?t=" + SPA.timestamp(), {a:1});   // switch to page 2, use timestamp to generate a new instance of the page even if the page was visited before
 	});
 	
 	var r = document.createElement("div");
@@ -77,7 +77,7 @@ makes:
 |__content2__|
 ```
 
-Add the pages into the framework:
+Add the pages into the framework. These will add the 2 pages into the body of the page layout.
 
 ```javascript
 SPA.addPages([
