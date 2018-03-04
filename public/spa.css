@@ -13,19 +13,35 @@ body {
 .spa_first_page {
     display:block;
 }
-.spa_closing {
-    animation-name: spa_closing;
+.spa_closing_bck {
+    animation-name: spa_closing_bck;
     display:block;
 }
-.spa_opening {
-    animation-name: spa_opening;
+.spa_closing_fwd {
+    animation-name: spa_closing_fwd;
     display:block;
 }
-@keyframes spa_closing {
+.spa_opening_bck {
+    animation-name: spa_opening_bck;
+    display:block;
+}
+.spa_opening_fwd {
+    animation-name: spa_opening_fwd;
+    display:block;
+}
+@keyframes spa_closing_bck {
     0%   {transform:translateX(0%);}
     100%  {transform:translateX(-100%);}
 }
-@keyframes spa_opening {
+@keyframes spa_closing_fwd {
+    0%   {transform:translateX(-100%);}
+    100%  {transform:translateX(0%);}
+}
+@keyframes spa_opening_bck {
     0%   {transform:translateX(100%);}
     100%  {transform:translateX(0%);}
+}
+@keyframes spa_opening_fwd {
+    0%   {transform:translateX(0%);}
+    100%  {transform:translateX(100%);}
 }

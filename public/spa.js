@@ -2,7 +2,9 @@ var SPA = new function() {
 	
 	var opened = {},   // obj of opened views
 		pages = [],    // pages array
-		active = null; // current opened page
+		active = null, // current opened page
+		UID = 0,
+		LUID = 0; 
 	
 	/** 
 	 * Get unique identifier for a page url. 
@@ -22,36 +24,35 @@ var SPA = new function() {
 	
 	/**
 	 * Start the framework and open a page determined from the url.
-	 * @param {*} data 
 	 */
-	this.start = function(data) {
-		loadPageFromHash(data);
+	this.start = function() {
+		loadPageFromHash(UID++);
 	};
 	
 	/**
 	 * Open a page.
-	 * @param {*} stateObj 
 	 * @param {*} url 
 	 */
-	this.openPage = function(stateObj, url) {
-		history.pushState(stateObj, "", url);
-		loadPageFromHash(stateObj);
+	this.openPage = function(url) {
+		history.pushState(UID, "", url);
+		loadPageFromHash(UID);
+		UID++;
 	};
 
 	/**
 	 * Open page from url.
-	 * @param {*} data 
+	 * @param {*} CUID 
 	 */
-	function loadPageFromHash(data) {
+	function loadPageFromHash(CUID) {
 		var path = window.location.pathname;
 		var page = pages.find(p => p.path.toLowerCase() == path.toLowerCase()) || pages.find(p => p.default);
 		if (page) {
 			var url = window.location.href;
 			var p = opened[url];
 			if (p) {
-				enablePage(page, p);
+				enablePage(page, p, CUID > LUID);
 			} else {
-				openPage(url, page, data);
+				openPage(url, page);
 			}
 		} else {
 			console.warn("SPA: No route found for", path);
@@ -63,21 +64,20 @@ var SPA = new function() {
 	 * Show the page.
 	 * @param {*} page 
 	 * @param {*} p 
+	 * @param {*} newPage 
 	 */
-	function enablePage(page, p) {
-		pages.forEach(p => {
-			if (p.layout == page.layout) {
-				//p.layout.style.display = "block";
-			} else {
-				//p.layout.style.display = "none";
-			}
-		});
+	function enablePage(page, p, newPage) {
 		if (active) {
 			if (page.layout != active.layout) {
-				active.layout.classList.remove("spa_opening");
-				active.layout.classList.add("spa_closing");
-				page.layout.classList.remove("spa_closing");
-				page.layout.classList.add("spa_opening");	
+				active.layout.classList.remove("spa_closing_bck", "spa_opening_fwd");
+				page.layout.classList.remove("spa_opening_bck", "spa_closing_fwd");
+				if (newPage) {
+					active.layout.classList.add("spa_closing_bck");
+					page.layout.classList.add("spa_opening_bck");	
+				} else {
+					active.layout.classList.add("spa_opening_fwd");
+					page.layout.classList.add("spa_closing_fwd");	
+				}
 			}
 		} else {
 			page.layout.classList.add("spa_first_page");
@@ -101,18 +101,18 @@ var SPA = new function() {
 	 * Open the page.
 	 * @param {*} id 
 	 * @param {*} page 
-	 * @param {*} data 
 	 */
-	function openPage(id, page, data) {
+	function openPage(id, page) {
 		page.content(p => {
 			opened[id] = p;
 			page.context.appendChild(p);
-			enablePage(page, p);
-		}, data);
+			enablePage(page, p, true);
+		});
 	}
 	
 	window.addEventListener('popstate', event => {
-		var data = event.state;
+		var data = event.state || 0;
 		loadPageFromHash(data);
+		LUID = data;
 	}, false);
 };

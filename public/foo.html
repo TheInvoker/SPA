@@ -35,19 +35,19 @@
 			document.body.appendChild(layout);
 			document.body.appendChild(layout2);
 
-			var c1 = function(callback, data) {
+			var c1 = function(callback) {
 				var a = document.createElement("a");
 				a.innerHTML = "click";
 				a.setAttribute("href", "javascript:void(0);");
 				a.addEventListener("click", function() {
-					SPA.openPage({a:1}, "bar?t=" + SPA.timestamp());
+					SPA.openPage("bar?t=" + SPA.timestamp());
 				});
 				
 				var r = document.createElement("div");
 				r.appendChild(a);
 				callback(r);
 			};
-			var c2 = function(callback, data) {
+			var c2 = function(callback) {
 				var r = document.createElement("div");
 				r.innerHTML = "content2";
 				callback(r);
@@ -89,7 +89,7 @@
 					}
 				}
 			]);
-			SPA.start({a:1});
+			SPA.start();
 
 		</script>
 	</body>
