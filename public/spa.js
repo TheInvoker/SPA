@@ -37,7 +37,7 @@ var SPA = new function() {
 	
 	function enablePage(page, p) {
 		pages.forEach(p => {
-			p.layout.style.display = p == page ? "block" : "none";
+			p.layout.style.display = (p.layout == page.layout) ? "block" : "none";
 		});
 		
 		page.context.childNodes.forEach(c => {
