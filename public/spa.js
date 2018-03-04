@@ -14,7 +14,10 @@ var SPA = new function() {
 	 * @param {*} user_pages 
 	 */
 	this.addPages = function(user_pages) {
-		user_pages.forEach(p => pages.push(p));
+		user_pages.forEach(p => {
+			p.layout.classList.add("spa_page");
+			pages.push(p);
+		});
 	};
 	
 	/**
@@ -63,9 +66,23 @@ var SPA = new function() {
 	 */
 	function enablePage(page, p) {
 		pages.forEach(p => {
-			p.layout.style.display = (p.layout == page.layout) ? "block" : "none";
+			if (p.layout == page.layout) {
+				//p.layout.style.display = "block";
+			} else {
+				//p.layout.style.display = "none";
+			}
 		});
-		
+		if (active) {
+			if (page.layout != active.layout) {
+				active.layout.classList.remove("spa_opening");
+				active.layout.classList.add("spa_closing");
+				page.layout.classList.remove("spa_closing");
+				page.layout.classList.add("spa_opening");	
+			}
+		} else {
+			page.layout.classList.add("spa_first_page");
+		}
+
 		page.context.childNodes.forEach(c => {
 			c.style.display = c == p ? "block" : "none";
 		});

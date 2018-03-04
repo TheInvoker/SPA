@@ -3,23 +3,37 @@
 	<head>
 		<title>SPA Test</title>
 		<script src="spa.js"></script>
+		<link rel="stylesheet" type="text/css" href="spa.css">
 	</head>
 
 	<body>
 		<script>
 
 			var layout = document.createElement("div");
+			layout.style.backgroundColor="cyan";
 			var h = document.createElement("div");
 			var b = document.createElement("div");
 			var f = document.createElement("div");
 			layout.appendChild(h);
 			layout.appendChild(b);
 			layout.appendChild(f);
-			
 			h.innerHTML = "header";
 			f.innerHTML = "footer";
+
+			var layout2 = document.createElement("div");
+			layout2.style.backgroundColor="yellow";
+			var h2 = document.createElement("div");
+			var b2 = document.createElement("div");
+			var f2 = document.createElement("div");
+			layout2.appendChild(h2);
+			layout2.appendChild(b2);
+			layout2.appendChild(f2);
+			h2.innerHTML = "header";
+			f2.innerHTML = "footer";
+
 			
 			document.body.appendChild(layout);
+			document.body.appendChild(layout2);
 
 			var c1 = function(callback, data) {
 				var a = document.createElement("a");
@@ -59,8 +73,8 @@
 				},
 				{
 					path : "/bar",
-					layout : layout,
-					context : b,
+					layout : layout2,
+					context : b2,
 					content : c2,
 					default : false,
 					opened : false,

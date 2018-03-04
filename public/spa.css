@@ -1,0 +1,31 @@
+body {
+    margin:0;
+}
+.spa_page {
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+    display:none;
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+}
+.spa_first_page {
+    display:block;
+}
+.spa_closing {
+    animation-name: spa_closing;
+    display:block;
+}
+.spa_opening {
+    animation-name: spa_opening;
+    display:block;
+}
+@keyframes spa_closing {
+    0%   {transform:translateX(0%);}
+    100%  {transform:translateX(-100%);}
+}
+@keyframes spa_opening {
+    0%   {transform:translateX(100%);}
+    100%  {transform:translateX(0%);}
+}
