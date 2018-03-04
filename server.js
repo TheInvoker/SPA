@@ -15,6 +15,11 @@ app.get('/foo', function(req, res) {
 	res.sendFile(path.join(__dirname, 'public/foo.html'));
 });
 
+app.get('/bar', function(req, res) {
+	res.header('Content-Type', "text/html; charset=utf-8");
+	res.sendFile(path.join(__dirname, 'public/foo.html'));
+});
+
 // start the server
 var server = app.listen(process.env.PORT || 3000, function () {
 	console.log("Server started...");

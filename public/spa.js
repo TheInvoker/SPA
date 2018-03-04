@@ -1,24 +1,44 @@
 var SPA = new function() {
 	
-	var opened = {},
-		pages = [],
-		active = null;
+	var opened = {},   // obj of opened views
+		pages = [],    // pages array
+		active = null; // current opened page
 	
+	/** 
+	 * Get unique identifier for a page url. 
+	 */
 	this.timestamp = () => new Date().valueOf();
 
+	/**
+	 * Add an array of user pages into the framework.
+	 * @param {*} user_pages 
+	 */
 	this.addPages = function(user_pages) {
 		user_pages.forEach(p => pages.push(p));
 	};
 	
+	/**
+	 * Start the framework and open a page determined from the url.
+	 * @param {*} data 
+	 */
 	this.start = function(data) {
 		loadPageFromHash(data);
 	};
 	
+	/**
+	 * Open a page.
+	 * @param {*} stateObj 
+	 * @param {*} url 
+	 */
 	this.openPage = function(stateObj, url) {
 		history.pushState(stateObj, "", url);
 		loadPageFromHash(stateObj);
 	};
 
+	/**
+	 * Open page from url.
+	 * @param {*} data 
+	 */
 	function loadPageFromHash(data) {
 		var path = window.location.pathname;
 		var page = pages.find(p => p.path.toLowerCase() == path.toLowerCase()) || pages.find(p => p.default);
@@ -37,7 +57,7 @@ var SPA = new function() {
 	}
 	
 	/**
-	 * 
+	 * Show the page.
 	 * @param {*} page 
 	 * @param {*} p 
 	 */
@@ -60,6 +80,12 @@ var SPA = new function() {
 		page.open();
 	}
 	
+	/**
+	 * Open the page.
+	 * @param {*} id 
+	 * @param {*} page 
+	 * @param {*} data 
+	 */
 	function openPage(id, page, data) {
 		page.content(p => {
 			opened[id] = p;
