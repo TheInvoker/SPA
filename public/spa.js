@@ -23,7 +23,7 @@ var SPA = new function() {
 		var path = window.location.pathname;
 		var page = pages.find(p => p.path.toLowerCase() == path.toLowerCase()) || pages.find(p => p.default);
 		if (page) {
-			var url = window.location.pathname + window.location.hash + window.location.search;
+			var url = window.location.href;
 			var p = opened[url];
 			if (p) {
 				enablePage(page, p);
@@ -32,9 +32,15 @@ var SPA = new function() {
 			}
 		} else {
 			console.warn("SPA: No route found for", path);
+			alert("SPA: No route found for", path);
 		}
 	}
 	
+	/**
+	 * 
+	 * @param {*} page 
+	 * @param {*} p 
+	 */
 	function enablePage(page, p) {
 		pages.forEach(p => {
 			p.layout.style.display = (p.layout == page.layout) ? "block" : "none";
