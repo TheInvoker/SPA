@@ -52,7 +52,7 @@ var SPA = new function() {
 			}
 		} else {
 			console.warn("SPA: No route found for", path);
-			alert("SPA: No route found for", path);
+			alert("SPA: No route found for: " + path);
 		}
 	}
 	
