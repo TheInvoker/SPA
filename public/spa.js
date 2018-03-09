@@ -79,16 +79,18 @@ var SPA = new function() {
 					page.layout.classList.add("spa_closing_fwd");	
 				}
 			}
-		} else {
-			page.layout.classList.add("spa_first_page");
 		}
 
 		page.context.childNodes.forEach(c => {
 			c.style.display = c == p ? "block" : "none";
 		});
 
-		if (active) active.close();
+		if (active) {
+			active.close();
+			active.layout.classList.remove("sp_active_page");
+		}
 		active = page;
+		active.layout.classList.add("sp_active_page");
 		
 		if (!page.opened) {
 			page.opened = true;

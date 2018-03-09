@@ -1,33 +1,29 @@
 body {
     margin:0;
+    overflow: hidden;
 }
 .spa_page {
-    animation-duration: 5s;
-    animation-fill-mode: forwards;
-    display:none;
+    animation-duration: 0.3s;
     position: absolute;
     top:0;
     left:0;
     width:100%;
 }
-.spa_first_page {
+.sp_active_page {
     display:block;
+    z-index:1000;
 }
 .spa_closing_bck {
     animation-name: spa_closing_bck;
-    display:block;
 }
 .spa_closing_fwd {
     animation-name: spa_closing_fwd;
-    display:block;
 }
 .spa_opening_bck {
     animation-name: spa_opening_bck;
-    display:block;
 }
 .spa_opening_fwd {
     animation-name: spa_opening_fwd;
-    display:block;
 }
 @keyframes spa_closing_bck {
     0%   {transform:translateX(0%);}
