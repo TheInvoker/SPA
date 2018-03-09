@@ -69,8 +69,8 @@ var SPA = new function() {
 	function enablePage(page, p, newPage) {
 		if (active) {
 			if (page.layout != active.layout) {
-				active.layout.classList.remove("spa_closing_bck", "spa_opening_fwd");
-				page.layout.classList.remove("spa_opening_bck", "spa_closing_fwd");
+				active.layout.classList.remove("spa_closing_bck", "spa_opening_bck", "spa_opening_fwd", "spa_closing_fwd");
+				page.layout.classList.remove("spa_closing_bck", "spa_opening_bck", "spa_opening_fwd", "spa_closing_fwd");
 				if (newPage) {
 					active.layout.classList.add("spa_closing_bck");
 					page.layout.classList.add("spa_opening_bck");	
