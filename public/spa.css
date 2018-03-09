@@ -41,3 +41,12 @@ body {
     0%   {transform:translateX(0%);}
     100%  {transform:translateX(100%);}
 }
+.spa_context {
+    
+}
+.spa_item {
+    display:block;
+}
+.spa_closed_item {
+    display:none;
+}
