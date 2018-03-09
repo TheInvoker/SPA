@@ -6,11 +6,6 @@ var SPA = new function() {
 		UID = 0,
 		LUID = 0; 
 	
-	/** 
-	 * Get unique identifier for a page url. 
-	 */
-	this.timestamp = () => new Date().valueOf();
-
 	/**
 	 * Add an array of user pages into the framework.
 	 * @param {*} user_pages 
@@ -34,10 +29,38 @@ var SPA = new function() {
 	 * @param {*} url 
 	 */
 	this.openPage = function(url) {
+		url = attachTimeStamp(url);
 		history.pushState(UID, "", url);
 		loadPageFromHash(UID);
 		UID++;
 	};
+
+	/**
+	 * 
+	 * @param {*} url 
+	 * https://superuser.com/questions/498617/does-an-anchor-tag-come-before-the-query-string-or-after
+	 */
+	function attachTimeStamp(url) {
+		var timestamp = new Date().valueOf();
+
+		url = "http://www.google.ca#f?g=3";
+		var mark1 = url.indexOf("?");
+		var mark2 = url.indexOf("#");
+
+		if (mark1 == -1 && mark2 == -1) {
+			return url + "?t=" + timestamp;
+		} else if (mark1 == -1) {
+			return url.substring(0, mark2) + "?t=" + timestamp + url.substr(mark2);
+		} else if (mark2 == -1) {
+			return url + "&t=" + timestamp;
+		} else {
+			if (mark1 < mark2) {
+				return url.substring(0, mark2) + "&t=" + timestamp + url.substr(mark2);
+			} else {
+				// TODO
+			}
+		}
+	}
 
 	/**
 	 * Open page from url.
