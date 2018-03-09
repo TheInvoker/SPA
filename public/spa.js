@@ -19,63 +19,37 @@ var SPA = new function() {
 	
 	/**
 	 * Start the framework and open a page determined from the url.
+	 * @param {*} data
 	 */
-	this.start = function() {
-		loadPageFromHash(UID++);
+	this.start = function(data) {
+		loadPageFromHash(UID++, data);
 	};
 	
 	/**
 	 * Open a page.
 	 * @param {*} url 
+	 * @param {*} data
 	 */
-	this.openPage = function(url) {
-		url = attachTimeStamp(url);
+	this.openPage = function(url, data) {
 		history.pushState(UID, "", url);
-		loadPageFromHash(UID);
+		loadPageFromHash(UID, data);
 		UID++;
 	};
 
 	/**
-	 * 
-	 * @param {*} url 
-	 * https://superuser.com/questions/498617/does-an-anchor-tag-come-before-the-query-string-or-after
-	 */
-	function attachTimeStamp(url) {
-		var timestamp = new Date().valueOf();
-
-		url = "http://www.google.ca#f?g=3";
-		var mark1 = url.indexOf("?");
-		var mark2 = url.indexOf("#");
-
-		if (mark1 == -1 && mark2 == -1) {
-			return url + "?t=" + timestamp;
-		} else if (mark1 == -1) {
-			return url.substring(0, mark2) + "?t=" + timestamp + url.substr(mark2);
-		} else if (mark2 == -1) {
-			return url + "&t=" + timestamp;
-		} else {
-			if (mark1 < mark2) {
-				return url.substring(0, mark2) + "&t=" + timestamp + url.substr(mark2);
-			} else {
-				// TODO
-			}
-		}
-	}
-
-	/**
 	 * Open page from url.
 	 * @param {*} CUID 
+	 * @param {*} data 
 	 */
-	function loadPageFromHash(CUID) {
+	function loadPageFromHash(CUID, data) {
 		var path = window.location.pathname;
-		var page = pages.find(p => p.path.toLowerCase() == path.toLowerCase()) || pages.find(p => p.default);
+		var page = pages.find(p => p.path.toLowerCase() == path.toLowerCase());
 		if (page) {
-			var url = window.location.href;
-			var p = opened[url];
+			var p = opened[CUID];
 			if (p) {
 				enablePage(page, p, CUID > LUID);
 			} else {
-				openPage(url, page);
+				openPage(CUID, page, data);
 			}
 		} else {
 			console.warn("SPA: No route found for", path);
@@ -101,19 +75,19 @@ var SPA = new function() {
 					active.layout.classList.add("spa_opening_fwd");
 					page.layout.classList.add("spa_closing_fwd");	
 				}
+				active.close();
+				active.layout.classList.remove("sp_active_page");
+				active = page;
+				active.layout.classList.add("sp_active_page");
 			}
+		} else {
+			active = page;
+			active.layout.classList.add("sp_active_page");
 		}
 
 		page.context.childNodes.forEach(c => {
 			c.style.display = c == p ? "block" : "none";
 		});
-
-		if (active) {
-			active.close();
-			active.layout.classList.remove("sp_active_page");
-		}
-		active = page;
-		active.layout.classList.add("sp_active_page");
 		
 		if (!page.opened) {
 			page.opened = true;
@@ -126,18 +100,19 @@ var SPA = new function() {
 	 * Open the page.
 	 * @param {*} id 
 	 * @param {*} page 
+	 * @param {*} data 
 	 */
-	function openPage(id, page) {
+	function openPage(id, page, data) {
 		page.content(p => {
 			opened[id] = p;
 			page.context.appendChild(p);
 			enablePage(page, p, true);
-		});
+		}, data);
 	}
 	
 	window.addEventListener('popstate', event => {
 		var data = event.state || 0;
-		loadPageFromHash(data);
+		loadPageFromHash(data, null);
 		LUID = data;
 	}, false);
 };

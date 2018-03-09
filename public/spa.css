@@ -3,7 +3,7 @@ body {
     overflow: hidden;
 }
 .spa_page {
-    animation-duration: 0.3s;
+    animation-duration: 5s;
     position: absolute;
     top:0;
     left:0;
