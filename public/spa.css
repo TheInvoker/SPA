@@ -41,12 +41,10 @@ body {
     0%   {transform:translateX(0%);}
     100%  {transform:translateX(100%);}
 }
-.spa_context {
-    
-}
 .spa_item {
-    display:block;
+    transition: opacity 0.5s;
+    opacity:0;
 }
-.spa_closed_item {
-    display:none;
+.spa_open_item {
+    opacity:1;
 }

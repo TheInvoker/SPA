@@ -13,7 +13,6 @@ var SPA = new function() {
 	this.addPages = function(user_pages) {
 		user_pages.forEach(p => {
 			p.layout.classList.add("spa_page");
-			p.context.classList.add("spa_context");
 			pages.push(p);
 		});
 	};
@@ -88,13 +87,20 @@ var SPA = new function() {
 
 		page.context.childNodes.forEach(c => {
 			if (c == p) {
-				//c.classList.add();
-				c.classList.remove("spa_closed_item");
+				setTimeout(function() {
+					c.style.display = "block";
+					requestAnimationFrame(function() {
+						requestAnimationFrame(function() {
+							c.classList.add("spa_open_item");
+						});
+					});
+				}, 501);
 			} else {
-				c.classList.add("spa_closed_item");
-				//c.classList.remove();
+				c.classList.remove("spa_open_item");
+				setTimeout(function() {
+					c.style.display = "none";
+				}, 500);
 			}
-			//c.style.display = c == p ? "block" : "none";
 		});
 		
 		if (!page.opened) {
@@ -112,9 +118,14 @@ var SPA = new function() {
 	 */
 	function openPage(id, page, data) {
 		page.content(p => {
-			p.classList.add("spa_item");
 			opened[id] = p;
 			page.context.appendChild(p);
+			p.classList.add("spa_item");
+			if (p.parentNode.childNodes.length == 1) {
+				p.classList.add("spa_open_item");
+			} else {
+				p.style.display = "none";
+			}
 			enablePage(page, p, true);
 		}, data);
 	}
