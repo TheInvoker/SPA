@@ -2,7 +2,8 @@ var SPA = new function() {
 	
 	var opened = {},   // obj of opened views
 		pages = [],    // pages array
-		active = null, // current opened page
+		active_page = null, // current opened page
+		active_item = null, // current opened item
 		UID = 0,
 		LUID = 0; 
 	
@@ -13,6 +14,7 @@ var SPA = new function() {
 	this.addPages = function(user_pages) {
 		user_pages.forEach(p => {
 			p.layout.classList.add("spa_page");
+			p.context.classList.add("spa_context_container");
 			pages.push(p);
 		});
 	};
@@ -64,45 +66,47 @@ var SPA = new function() {
 	 * @param {*} newPage 
 	 */
 	function enablePage(page, p, newPage) {
-		if (active) {
-			if (page.layout != active.layout) {
-				active.layout.classList.remove("spa_closing_bck", "spa_opening_bck", "spa_opening_fwd", "spa_closing_fwd");
-				page.layout.classList.remove("spa_closing_bck", "spa_opening_bck", "spa_opening_fwd", "spa_closing_fwd");
+		if (active_item) {
+			if (p != active_item) {
+				active_item.classList.remove("spa_closing_bck", "spa_opening_bck", "spa_opening_fwd", "spa_closing_fwd");
+				p.classList.remove("spa_closing_bck", "spa_opening_bck", "spa_opening_fwd", "spa_closing_fwd");
 				if (newPage) {
-					active.layout.classList.add("spa_closing_bck");
-					page.layout.classList.add("spa_opening_bck");	
+					active_item.classList.add("spa_closing_bck");
+					p.classList.add("spa_opening_bck");	
 				} else {
-					active.layout.classList.add("spa_opening_fwd");
-					page.layout.classList.add("spa_closing_fwd");	
+					active_item.classList.add("spa_opening_fwd");
+					p.classList.add("spa_closing_fwd");	
 				}
-				active.close();
-				active.layout.classList.remove("sp_active_page");
-				active = page;
-				active.layout.classList.add("sp_active_page");
+				active_page.close();
+				active_item.classList.remove("spa_active_item");
+				active_item = p;
+				active_item.classList.add("spa_active_item");
 			}
 		} else {
-			active = page;
-			active.layout.classList.add("sp_active_page");
+			active_item = p;
+			active_item.classList.add("spa_active_item");
 		}
 
-		page.context.childNodes.forEach(c => {
-			if (c == p) {
-				setTimeout(function() {
-					c.style.display = "block";
-					requestAnimationFrame(function() {
-						requestAnimationFrame(function() {
-							c.classList.add("spa_open_item");
-						});
-					});
-				}, 501);
-			} else {
-				c.classList.remove("spa_open_item");
-				setTimeout(function() {
-					c.style.display = "none";
-				}, 500);
+		if (active_page) {
+			if (page.layout != active_page.layout) {
+				active_page.layout.classList.remove("spa_closing_bck", "spa_opening_bck", "spa_opening_fwd", "spa_closing_fwd");
+				page.layout.classList.remove("spa_closing_bck", "spa_opening_bck", "spa_opening_fwd", "spa_closing_fwd");
+				if (newPage) {
+					active_page.layout.classList.add("spa_closing_bck");
+					page.layout.classList.add("spa_opening_bck");	
+				} else {
+					active_page.layout.classList.add("spa_opening_fwd");
+					page.layout.classList.add("spa_closing_fwd");	
+				}
+				active_page.layout.classList.remove("sp_active_page");
+				active_page = page;
+				active_page.layout.classList.add("sp_active_page");
 			}
-		});
-		
+		} else {
+			active_page = page;
+			active_page.layout.classList.add("sp_active_page");
+		}
+
 		if (!page.opened) {
 			page.opened = true;
 			page.first_open();
@@ -121,11 +125,6 @@ var SPA = new function() {
 			opened[id] = p;
 			page.context.appendChild(p);
 			p.classList.add("spa_item");
-			if (p.parentNode.childNodes.length == 1) {
-				p.classList.add("spa_open_item");
-			} else {
-				p.style.display = "none";
-			}
 			enablePage(page, p, true);
 		}, data);
 	}

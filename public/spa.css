@@ -1,17 +1,21 @@
 body {
     margin:0;
-    overflow: hidden;
+    overflow-x: hidden;
 }
-.spa_page {
+.spa_page, .spa_item {
     animation-duration: 5s;
     position: absolute;
     top:0;
     left:0;
     width:100%;
+    z-index:-1000;
 }
-.sp_active_page {
-    display:block;
-    z-index:1000;
+.sp_active_page, .spa_active_item {
+    position:static;
+}
+.spa_context_container {
+    position:relative;
+    overflow-x: hidden;
 }
 .spa_closing_bck {
     animation-name: spa_closing_bck;
@@ -40,11 +44,4 @@ body {
 @keyframes spa_opening_fwd {
     0%   {transform:translateX(0%);}
     100%  {transform:translateX(100%);}
-}
-.spa_item {
-    transition: opacity 0.5s;
-    opacity:0;
-}
-.spa_open_item {
-    opacity:1;
 }
