@@ -4,17 +4,14 @@ body {
 }
 .spa_page, .spa_item {
     animation-duration: 5s;
+    animation-fill-mode: forwards;
     top:0;
     left:0;
     width:100%;
-    z-index:-1000;
     display:none;
 }
 .spa_page {
     position: absolute;
-}
-.spa_item {
-    position: relative;
 }
 .sp_active_page, .spa_active_item {
     position:static;

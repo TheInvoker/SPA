@@ -40,16 +40,29 @@
 				a.innerHTML = "click";
 				a.setAttribute("href", "javascript:void(0);");
 				a.addEventListener("click", function() {
-					SPA.openPage("bar", {}); // pass data
+					SPA.openPage("/gg", {}); // pass data
 				});
 				
+				var b = document.createElement("a");
+				b.innerHTML = "click2";
+				b.setAttribute("href", "javascript:void(0);");
+				b.addEventListener("click", function() {
+					SPA.openPage("/bar", {}); // pass data
+				});
+
 				var r = document.createElement("div");
 				r.appendChild(a);
+				r.appendChild(b);
 				callback(r);
 			};
 			var c2 = function(callback, data) {
 				var r = document.createElement("div");
 				r.innerHTML = "content2";
+				callback(r);
+			};
+			var c3 = function(callback, data) {
+				var r = document.createElement("div");
+				r.innerHTML = "hehe";
 				callback(r);
 			};
 			
@@ -59,6 +72,12 @@
 					layout : layout,
 					context : b,
 					content : c1
+				},
+				{
+					path : "/gg",
+					layout : layout,
+					context : b,
+					content : c3
 				},
 				{
 					path : "/bar",

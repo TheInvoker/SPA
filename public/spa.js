@@ -58,6 +58,15 @@ var SPA = new function() {
 			alert("SPA: No route found for: " + path);
 		}
 	}
+
+	/**
+	 * 
+	 * @param {*} a 
+	 * @param {*} b 
+	 */
+	function siblings(a, b) {
+		return a.parentNode === b.parentNode;
+	}
 	
 	/**
 	 * Show the page.
@@ -77,6 +86,12 @@ var SPA = new function() {
 					active_item.classList.add("spa_opening_fwd");
 					p.classList.add("spa_closing_fwd");	
 				}
+				if (siblings(active_item, p)) {
+					active_item.style.position = "absolute";
+				} else {
+					active_item.style.position = "static";
+				}
+				p.style.position = "";
 				active_item.classList.remove("spa_active_item");
 				active_item = p;
 				active_item.classList.add("spa_active_item");
