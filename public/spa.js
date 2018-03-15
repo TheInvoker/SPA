@@ -4,6 +4,7 @@ var SPA = new function() {
 		pages = [],    // pages array
 		active_page = null, // current opened page
 		active_item = null, // current opened item
+		url_mapping = {},
 		UID = 0,
 		LUID = 0; 
 	
@@ -30,12 +31,20 @@ var SPA = new function() {
 	/**
 	 * Open a page.
 	 * @param {*} url 
-	 * @param {*} data
+	 * @param {*} data 
+	 * @param {*} useExisting 
 	 */
-	this.openPage = function(url, data) {
-		history.pushState(UID, "", url);
-		loadPageFromHash(UID, data);
-		UID++;
+	this.openPage = function(url, data, useExisting) {
+		if (useExisting && url_mapping.hasOwnProperty(url)) {
+			var old_UID = url_mapping[url];
+			history.pushState(old_UID, "", url);
+			loadPageFromHash(old_UID, data);
+		} else {
+			url_mapping[url] = UID;
+			history.pushState(UID, "", url);
+			loadPageFromHash(UID, data);
+			UID++;
+		}
 	};
 
 	/**

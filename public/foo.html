@@ -41,14 +41,14 @@
 				a.innerHTML = "click";
 				a.setAttribute("href", "javascript:void(0);");
 				a.addEventListener("click", function() {
-					SPA.openPage("/gg", {}); // pass data
+					SPA.openPage("/gg", {}, false); // pass data
 				});
 				
 				var b = document.createElement("a");
 				b.innerHTML = "click2";
 				b.setAttribute("href", "javascript:void(0);");
 				b.addEventListener("click", function() {
-					SPA.openPage("/bar", {}); // pass data
+					SPA.openPage("/bar", {}, true); // pass data
 				});
 
 				var r = document.createElement("div");
