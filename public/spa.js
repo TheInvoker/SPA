@@ -60,7 +60,7 @@ var SPA = new function() {
 	}
 
 	/**
-	 * 
+	 * Checks if the elements are siblings.
 	 * @param {*} a 
 	 * @param {*} b 
 	 */
@@ -86,12 +86,14 @@ var SPA = new function() {
 					active_item.classList.add("spa_opening_fwd");
 					p.classList.add("spa_closing_fwd");	
 				}
+				///
 				if (siblings(active_item, p)) {
 					active_item.style.position = "absolute";
 				} else {
 					active_item.style.position = "static";
 				}
 				p.style.position = "";
+				///
 				active_item.classList.remove("spa_active_item");
 				active_item = p;
 				active_item.classList.add("spa_active_item");
@@ -131,6 +133,12 @@ var SPA = new function() {
 	function openPage(id, page, data) {
 		page.content(p => {
 			opened[id] = p;
+			///
+			var c = page.context.childNodes;
+			for(var i=0; i<c.length; i++) {
+				c[i].style.position = "absolute";
+			}
+			///
 			page.context.appendChild(p);
 			p.classList.add("spa_item");
 			enablePage(page, p, true);
