@@ -60,15 +60,6 @@ var SPA = new function() {
 	}
 
 	/**
-	 * Checks if the elements are siblings.
-	 * @param {*} a 
-	 * @param {*} b 
-	 */
-	function siblings(a, b) {
-		return a.parentNode === b.parentNode;
-	}
-	
-	/**
 	 * Show the page.
 	 * @param {*} page 
 	 * @param {*} p 
@@ -87,7 +78,7 @@ var SPA = new function() {
 					p.classList.add("spa_closing_fwd");	
 				}
 				///
-				if (siblings(active_item, p)) {
+				if (active_item.parentNode === p.parentNode) {
 					active_item.style.position = "absolute";
 				} else {
 					active_item.style.position = "static";
