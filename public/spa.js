@@ -77,7 +77,6 @@ var SPA = new function() {
 					active_item.classList.add("spa_opening_fwd");
 					p.classList.add("spa_closing_fwd");	
 				}
-				//active_page.close();
 				active_item.classList.remove("spa_active_item");
 				active_item = p;
 				active_item.classList.add("spa_active_item");
@@ -106,12 +105,6 @@ var SPA = new function() {
 			active_page = page;
 			active_page.layout.classList.add("sp_active_page");
 		}
-
-		//if (!page.opened) {
-		//	page.opened = true;
-		//	page.first_open();
-		//}
-		//page.open();
 	}
 	
 	/**

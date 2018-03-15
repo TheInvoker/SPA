@@ -4,14 +4,21 @@ body {
 }
 .spa_page, .spa_item {
     animation-duration: 5s;
-    position: absolute;
     top:0;
     left:0;
     width:100%;
     z-index:-1000;
+    display:none;
+}
+.spa_page {
+    position: absolute;
+}
+.spa_item {
+    position: relative;
 }
 .sp_active_page, .spa_active_item {
     position:static;
+    display:block;
 }
 .spa_context_container {
     position:relative;
@@ -19,15 +26,19 @@ body {
 }
 .spa_closing_bck {
     animation-name: spa_closing_bck;
+    display:block;
 }
 .spa_closing_fwd {
     animation-name: spa_closing_fwd;
+    display:block;
 }
 .spa_opening_bck {
     animation-name: spa_opening_bck;
+    display:block;
 }
 .spa_opening_fwd {
     animation-name: spa_opening_fwd;
+    display:block;
 }
 @keyframes spa_closing_bck {
     0%   {transform:translateX(0%);}
