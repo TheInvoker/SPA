@@ -35,7 +35,7 @@
 			document.body.appendChild(layout);
 			document.body.appendChild(layout2);
 
-			var c1 = function(callback) {
+			var c1 = function(callback, data) {
 				var a = document.createElement("a");
 				a.innerHTML = "click";
 				a.setAttribute("href", "javascript:void(0);");
@@ -47,7 +47,7 @@
 				r.appendChild(a);
 				callback(r);
 			};
-			var c2 = function(callback) {
+			var c2 = function(callback, data) {
 				var r = document.createElement("div");
 				r.innerHTML = "content2";
 				callback(r);
@@ -58,7 +58,7 @@
 					path : "/foo",
 					layout : layout,
 					context : b,
-					content : c1,
+					content : c1/*,
 					opened : false,
 					first_open : function() {
 						console.log("foo first opened"); 	
@@ -68,13 +68,13 @@
 					},
 					close : function() {
 						console.log("foo closed");
-					}
+					}*/
 				},
 				{
 					path : "/bar",
 					layout : layout2,
 					context : b2,
-					content : c2,
+					content : c2/*,
 					opened : false,
 					first_open : function() {
 						console.log("bar first opened"); 	
@@ -84,7 +84,7 @@
 					},
 					close : function() {
 						console.log("bar closed");
-					}
+					}*/
 				}
 			]);
 			SPA.start({});
