@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+var transpiler = require("./../Transpiler/transpile.js");
 
 // start express module
 var app = express();
@@ -24,3 +25,10 @@ app.get('/bar', function(req, res) {
 var server = app.listen(process.env.PORT || 3000, function () {
 	console.log("Server started...");
 });
+
+// watch and transpile
+var instance = new transpiler(["src"], ["public"], function(filepath) {
+    var p = path.relative("src", filepath);
+    var np = path.join("public", p);
+    return np;
+}, "/* header */", false, false, false, false, ["scss_lib"]);

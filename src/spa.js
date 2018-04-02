@@ -1,7 +1,3 @@
-"use strict";
-
-/* header */
-
 var SPA = new function() {
 	
 	var opened = {},   // obj of opened views

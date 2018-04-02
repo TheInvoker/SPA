@@ -1,55 +1,85 @@
+/* header */
+
 body {
-    margin:0;
+    margin: 0;
     overflow-x: hidden;
 }
+
 .spa_page, .spa_item {
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
-    top:0;
-    left:0;
-    width:100%;
-    display:none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: none;
 }
+
 .spa_page {
     position: absolute;
 }
+
 .spa_active_page, .spa_active_item {
-    position:static;
-    display:block;
+    position: static;
+    display: block;
 }
+
 .spa_context_container {
-    position:relative;
+    position: relative;
     overflow-x: hidden;
 }
+
 .spa_closing_bck {
     animation-name: spa_closing_bck;
-    display:block;
+    display: block;
 }
+
 .spa_closing_fwd {
     animation-name: spa_closing_fwd;
-    display:block;
+    display: block;
 }
+
 .spa_opening_bck {
     animation-name: spa_opening_bck;
-    display:block;
+    display: block;
 }
+
 .spa_opening_fwd {
     animation-name: spa_opening_fwd;
-    display:block;
+    display: block;
 }
+
 @keyframes spa_closing_bck {
-    0%   {transform:translateX(0%);}
-    100%  {transform:translateX(-100%);}
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }
+
 @keyframes spa_closing_fwd {
-    0%   {transform:translateX(-100%);}
-    100%  {transform:translateX(0%);}
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
 }
+
 @keyframes spa_opening_bck {
-    0%   {transform:translateX(100%);}
-    100%  {transform:translateX(0%);}
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
 }
+
 @keyframes spa_opening_fwd {
-    0%   {transform:translateX(0%);}
-    100%  {transform:translateX(100%);}
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
 }
