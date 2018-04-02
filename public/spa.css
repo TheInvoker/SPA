@@ -13,7 +13,7 @@ body {
 .spa_page {
     position: absolute;
 }
-.sp_active_page, .spa_active_item {
+.spa_active_page, .spa_active_item {
     position:static;
     display:block;
 }

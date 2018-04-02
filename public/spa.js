@@ -114,13 +114,13 @@ var SPA = new function() {
 					active_page.layout.classList.add("spa_opening_fwd");
 					page.layout.classList.add("spa_closing_fwd");	
 				}
-				active_page.layout.classList.remove("sp_active_page");
+				active_page.layout.classList.remove("spa_active_page");
 				active_page = page;
-				active_page.layout.classList.add("sp_active_page");
+				active_page.layout.classList.add("spa_active_page");
 			}
 		} else {
 			active_page = page;
-			active_page.layout.classList.add("sp_active_page");
+			active_page.layout.classList.add("spa_active_page");
 		}
 	}
 	
