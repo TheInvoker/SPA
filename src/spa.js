@@ -22,8 +22,9 @@
 	 */
 	this.addPages = function(user_pages) {
 		user_pages.forEach(p => {
+			p.layout.parentNode.classList.add("spa_container");
 			p.layout.classList.add("spa_page");
-			p.context.classList.add("spa_context_container");
+			p.context.classList.add("spa_container");
 			pages.push(p);
 		});
 	};

@@ -1,6 +1,7 @@
-body {
-    margin:0;
+.spa_container {
+    position:relative;
     overflow-x: hidden;
+    margin:0;
 }
 .spa_page, .spa_item {
     animation-duration: 0.5s;
@@ -11,10 +12,6 @@ body {
     top:0;
     left:0;
     right:0;
-}
-.spa_context_container {
-    position:relative;
-    overflow-x: hidden;
 }
 .spa_page:not(.spa_active_page):not(.spa_closing_bck):not(.spa_closing_fwd):not(.spa_opening_bck):not(.spa_opening_fwd) {
     display:none;
