@@ -87,6 +87,7 @@
 			if (p != active_item) {
 				active_item.classList.remove("spa_closing_bck", "spa_opening_bck", "spa_opening_fwd", "spa_closing_fwd");
 				p.classList.remove("spa_closing_bck", "spa_opening_bck", "spa_opening_fwd", "spa_closing_fwd");
+				///
 				if (newPage) {
 					active_item.classList.add("spa_closing_bck");
 					p.classList.add("spa_opening_bck");	
@@ -96,11 +97,11 @@
 				}
 				///
 				if (active_item.parentNode === p.parentNode) {
-					active_item.style.position = "absolute";
+					active_item.classList.add("spa_ghost_item");
 				} else {
-					active_item.style.position = "";
+					active_item.classList.remove("spa_ghost_item");
 				}
-				p.style.position = "";
+				p.classList.remove("spa_ghost_item");
 				///
 				active_item.classList.remove("spa_active_item");
 				active_item = p;
@@ -144,7 +145,7 @@
 			///
 			var c = page.context.childNodes;
 			for(var i=0; i<c.length; i++) {
-				c[i].style.position = "absolute";
+				c[i].classList.add("spa_ghost_item");
 			}
 			///
 			page.context.appendChild(p);

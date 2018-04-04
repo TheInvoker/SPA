@@ -5,12 +5,12 @@ body {
 .spa_page, .spa_item {
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
+}
+.spa_ghost_item, .spa_page:not(.spa_active_page) {
+    position: absolute;
     top:0;
     left:0;
-    width:100%;
-}
-.spa_page:not(.spa_active_page) {
-    position: absolute;
+    right:0;
 }
 .spa_context_container {
     position:relative;
