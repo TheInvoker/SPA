@@ -48,9 +48,11 @@
 			var old_UID = url_mapping[url];
 			history.pushState(old_UID, "", url);
 			loadPageFromHash(old_UID, data);
+			LUID = old_UID;
 		} else {
 			history.pushState(UID, "", url);
 			loadPageFromHash(UID, data);
+			LUID = UID;
 			UID++;
 		}
 	};
