@@ -49,7 +49,6 @@
 			history.pushState(old_UID, "", url);
 			loadPageFromHash(old_UID, data);
 		} else {
-			url_mapping[url] = UID;
 			history.pushState(UID, "", url);
 			loadPageFromHash(UID, data);
 			UID++;
@@ -62,6 +61,8 @@
 	 * @param {*} data 
 	 */
 	function loadPageFromHash(CUID, data) {
+		url_mapping[window.location.pathname + window.location.search + window.location.hash] = CUID;
+		
 		var path = window.location.pathname;
 		var page = pages.find(p => p.path.toLowerCase() == path.toLowerCase());
 		if (page) {
