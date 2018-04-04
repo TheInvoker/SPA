@@ -98,7 +98,7 @@
 				if (active_item.parentNode === p.parentNode) {
 					active_item.style.position = "absolute";
 				} else {
-					active_item.style.position = "static";
+					active_item.style.position = "";
 				}
 				p.style.position = "";
 				///
