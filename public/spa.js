@@ -2,7 +2,15 @@
 
 /* header */
 
-var SPA = new function() {
+((function(factory) {
+    if (typeof define === 'function' && define.amd) {
+        define([], function() { return factory; });
+    } else if (typeof window !== 'undefined') {
+        window.SPA = factory;
+    } else {
+        console.warn("Module didn't get loaded into memory.");
+    }
+})(new function() {
 	
 	var opened = {},   // obj of opened views
 		pages = [],    // pages array
@@ -154,4 +162,4 @@ var SPA = new function() {
 		loadPageFromHash(data, null);
 		LUID = data;
 	}, false);
-};
+}));
