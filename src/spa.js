@@ -66,7 +66,11 @@
 		url_mapping[window.location.pathname + window.location.search + window.location.hash] = CUID;
 		
 		var path = window.location.pathname;
-		var page = pages.find(p => p.path.toLowerCase() == path.toLowerCase());
+		var page = pages.find(p => {
+			var re = new RegExp(p.path, "i");
+			var matches = path.match(re);
+			return matches && matches[0] == path;
+		});
 		if (page) {
 			var p = opened[CUID];
 			if (p) {
