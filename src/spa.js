@@ -104,6 +104,11 @@
 					p.classList.add("spa_closing_fwd");	
 				}
 				///
+				p.classList.remove("spa_hidden_item");
+				setTimeout(function(active_item) {
+					active_item.classList.add("spa_hidden_item");
+				}, 500, active_item);
+				///
 				if (active_item.parentNode === p.parentNode) {
 					active_item.classList.add("spa_ghost_item");
 				} else {

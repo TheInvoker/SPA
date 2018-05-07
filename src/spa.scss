@@ -6,6 +6,9 @@
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
 }
+.spa_hidden_item {
+    display:none;
+}
 .spa_ghost_item, .spa_page:not(.spa_active_page) {
     position: absolute;
     top:0;
