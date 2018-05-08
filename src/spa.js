@@ -136,6 +136,12 @@
 					active_page.layout.classList.add("spa_opening_fwd");
 					page.layout.classList.add("spa_closing_fwd");	
 				}
+				///
+				page.layout.classList.remove("spa_hidden_item");
+				setTimeout(function(active_item) {
+					active_item.classList.add("spa_hidden_item");
+				}, 500, active_page.layout);
+				///
 				active_page.layout.classList.remove("spa_active_page");
 				active_page = page;
 				active_page.layout.classList.add("spa_active_page");
